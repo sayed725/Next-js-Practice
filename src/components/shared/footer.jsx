@@ -42,12 +42,12 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link href="/" className="hover:text-[white]">
-                      Services
+                      Colleges
                     </Link>
                   </li>
                   <li>
                     <Link href="/" className="hover:text-[white]">
-                      Blogs
+                      Admission
                     </Link>
                   </li>
                 </ul>

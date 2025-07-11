@@ -3,8 +3,10 @@ import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch, IoMdLogOut } from "react-icons/io";
 import { Button } from "@/components/ui/button";
+import { GoSignOut } from "react-icons/go";
+import { CgProfile } from "react-icons/cg";
 import {
   Sheet,
   SheetContent,
@@ -32,7 +34,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white text-black shadow-lg sticky top-0 z-10">
-      <div className="mx-auto w-11/12 py-4 flex justify-between items-center">
+      <div className="mx-auto w-11/12 py-4 flex justify-between  items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 cursor-pointer">
           <img
@@ -40,9 +42,7 @@ export default function Navbar() {
             alt="logo"
             className="w-8 h-8 sm:w-10 sm:h-10"
           />
-          <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
-            EDUGANG
-          </p>
+          <p className="text-2xl sm:text-3xl font-semibold">EDUGANG</p>
         </Link>
 
         {/* Desktop Navigation */}
@@ -56,29 +56,53 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="/services"
+              href="/college"
               className="text-gray-700 hover:text-[#0f82fc] transition capitalize relative before:w-0 hover:before:w-full before:bg-[#0f82fc] before:h-[2px] before:transition-all before:duration-300 before:absolute before:rounded-full before:bottom-[-2px] before:left-0"
             >
-              Services
+              Colleges
             </Link>
             <Link
-              href="/blog"
+              href="/admission"
               className="text-gray-700 hover:text-[#0f82fc] transition capitalize relative before:w-0 hover:before:w-full before:bg-[#0f82fc] before:h-[2px] before:transition-all before:duration-300 before:absolute before:rounded-full before:bottom-[-2px] before:left-0"
             >
-              Blog
+              Admission
             </Link>
             <SignedIn>
               <Link
-                href="/posts/create"
+                href="/my-college"
                 className="text-gray-700 hover:text-[#0f82fc] transition capitalize relative before:w-0 hover:before:w-full before:bg-[#0f82fc] before:h-[2px] before:transition-all before:duration-300 before:absolute before:rounded-full before:bottom-[-2px] before:left-0"
               >
-                Create Post
+                My College
               </Link>
             </SignedIn>
           </div>
 
           {/* Right-Aligned Auth Buttons */}
           <div className="flex items-center space-x-4">
+            <SignedOut>
+              <Button
+                asChild
+                variant="default"
+                size="sm"
+                className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] hover:text-white"
+              >
+                <Link href="/sign-in">Login</Link>
+              </Button>
+              <Button
+                asChild
+                variant="default"
+                size="sm"
+                className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] hover:text-white"
+              >
+                <Link href="/sign-up">Register</Link>
+              </Button>
+            </SignedOut>
+          </div>
+        </div>
+
+        {/* Mobile Hamburger Menu */}
+        <div className="flex gap-2 items-center">
+          <div>
             <SignedIn>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -111,15 +135,21 @@ export default function Navbar() {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive font-medium px-4">
+                  <DropdownMenuItem className="flex flex-col gap-2 justify-start items-start  font-medium px-4">
+                  
+                     <Link
+                    href="/profile"
+                    className="flex gap-1 items-center cursor-pointer"
+                    >
+                     <CgProfile className="text-blue-600 -mt-[1px] h-5 w-5" />{" "}
+                     Go To Profile
+                    </Link>
+
                     <SignOutButton>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] hover:text-white"
-                      >
-                        Sign Out
-                      </Button>
+                      <p className="flex gap-1 items-center cursor-pointer text-destructive">
+                      <GoSignOut className="text-destructive -mt-[1px] h-5 w-5" />{" "}
+                      Logout
+                      </p>
                     </SignOutButton>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -131,112 +161,66 @@ export default function Navbar() {
                 asChild
                 variant="default"
                 size="sm"
-                className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] hover:text-white"
+                className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] lg:hidden hover:text-white"
+                onClick={() => setIsOpen(false)}
               >
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
-              <Button
-                asChild
-                variant="default"
-                size="sm"
-                className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] hover:text-white"
-              >
-                <Link href="/sign-up">Sign Up</Link>
+                <Link href="/sign-in">Login</Link>
               </Button>
             </SignedOut>
           </div>
-        </div>
 
-        {/* Mobile Hamburger Menu */}
-        <div className="md:hidden">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Toggle menu">
-                {isOpen ? (
-                  <FaTimes className="h-6 w-6" />
-                ) : (
-                  <FaBars className="h-6 w-6" />
-                )}
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="border-none bg-gray-100 text-black">
-              <SheetHeader>
-                <SheetTitle className="text-2xl font-semibold text-black">
-                  EduGang
-                </SheetTitle>
-              </SheetHeader>
-              <div className="flex flex-col space-y-4 px-5 mt-4">
-                <Link
-                  href="/"
-                  className="text-lg hover:text-[#0f82fc] transition capitalize"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/services"
-                  className="text-lg hover:text-[#0f82fc] transition capitalize"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Services
-                </Link>
-                <Link
-                  href="/blog"
-                  className="text-lg hover:text-[#0f82fc] transition capitalize"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Blog
-                </Link>
-                <SignedIn>
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label="Toggle menu">
+                  {isOpen ? (
+                    <FaTimes className="h-6 w-6" />
+                  ) : (
+                    <FaBars className="h-6 w-6" />
+                  )}
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="border-none bg-gray-100 text-black">
+                <SheetHeader>
+                  <SheetTitle className="text-2xl font-semibold text-black">
+                    EduGang
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col space-y-4 px-5 mt-4">
                   <Link
-                    href="/posts/create"
+                    href="/"
                     className="text-lg hover:text-[#0f82fc] transition capitalize"
                     onClick={() => setIsOpen(false)}
                   >
-                    Create Post
+                    Home
                   </Link>
-                  <span className="text-sm text-black">
-                    Welcome, {user?.fullName}
-                  </span>
-                  <SignOutButton>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      className="bg-[#0f82fc] text-white w-1/2 hover:bg-[#0f82fc] hover:text-white"
+                  <Link
+                    href="/college"
+                    className="text-lg hover:text-[#0f82fc] transition capitalize"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Colleges
+                  </Link>
+                  <Link
+                    href="/admission"
+                    className="text-lg hover:text-[#0f82fc] transition capitalize"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Admission
+                  </Link>
+                  <SignedIn>
+                    <Link
+                      href="/my-college"
+                      className="text-lg hover:text-[#0f82fc] transition capitalize"
                       onClick={() => setIsOpen(false)}
                     >
-                      Sign Out
-                    </Button>
-                  </SignOutButton>
-                </SignedIn>
-
-
-
-                <SignedOut>
-                   <Button
-                    asChild
-                    variant="default"
-                    size="sm"
-                    className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] w-1/2 hover:text-white"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Link href="/sign-in">Sign In</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="default"
-                    size="sm"
-                    className="bg-[#0f82fc] text-white hover:bg-[#0f82fc] w-1/2 hover:text-white"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Link href="/sign-up">Sign Up</Link>
-                  </Button>
-                </SignedOut>
-
-
-              </div>
-            </SheetContent>
-          </Sheet>
+                      My College
+                    </Link>
+                  </SignedIn>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </nav>
