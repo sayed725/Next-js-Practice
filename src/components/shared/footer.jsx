@@ -96,7 +96,7 @@ export default function Footer() {
       </div>
 
       <Link href="/" className="flex justify-center items-center relative bottom-5">
-        <Button className="py-5 px-5 bg-[#0f82fc] hover:bg-[#0f82fc] text-white">
+        <Button className="py-5 px-5 bg-[#0f82fc]  text-white">
           <FaChevronUp />
         </Button>
       </Link>
