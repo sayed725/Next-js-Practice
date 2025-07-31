@@ -3,7 +3,6 @@ import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { IoIosSearch, IoMdLogOut } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import { GoSignOut } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
@@ -23,6 +22,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 export default function Navbar() {
   const { user } = useUser();
@@ -33,7 +33,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-white text-black shadow-lg sticky top-0 z-10">
+    <nav className="bg-white text-black shadow-lg sticky top-0 z-10 dark:bg-black dark:text-white">
       <div className="mx-auto w-11/12 py-4 flex justify-between  items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 cursor-pointer">
@@ -79,6 +79,9 @@ export default function Navbar() {
 
           {/* Right-Aligned Auth Buttons */}
           <div className="flex items-center space-x-4">
+            <ThemeSwitcher />
+
+
             <SignedOut>
               <Button
                 asChild

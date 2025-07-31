@@ -1,11 +1,9 @@
-// "use client";
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
-
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,13 +23,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+    <ThemeProvider>
+        <html lang="en">
         <body className="bg-gray-100">
           <Navbar />
-          <main className="max-w-7xl mx-auto">{children}</main>
+          <main className="max-w-7xl mx-auto">
+           {children}
+          </main>
           <Footer />
         </body>
       </html>
+    </ThemeProvider>
     </ClerkProvider>
   );
 }
