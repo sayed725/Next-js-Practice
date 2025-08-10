@@ -1,3 +1,5 @@
+'use server';
+
 import mongoose, { model, models, Schema } from "mongoose";
 
 const PostSchema = new Schema({

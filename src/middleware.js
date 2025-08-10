@@ -8,13 +8,15 @@ const isPublicRoute = createRouteMatcher([
   '/users(.*)',
   '/parellel-data',
   '/db-post',
+  '/api/posts',
+  '/api/post'
   
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoute(req)) {
-    await auth.protect()
-  }
+  // if (!isPublicRoute(req)) {
+  //   await auth.protect()
+  // }
 })
 
 export const config = {
