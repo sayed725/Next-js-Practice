@@ -7,6 +7,7 @@ const isPublicRoute = createRouteMatcher([
   '/posts',
   '/users(.*)',
   '/parellel-data',
+  '/db-post',
   
 ]);
 

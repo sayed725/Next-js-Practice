@@ -12,7 +12,7 @@ const ParellelDataFetching = async() => {
 
   return (
     <div className='min-h-screen mt-20 text-center'>
-       <h1 className='text-3xl font-bold'> ParellelDataFetching page </h1>
+       <h1 className='text-3xl font-bold'> Parellel DataFetching page </h1>
 
          <h2 className='text-2xl font-bold mt-10'>{users.length}</h2>
 
