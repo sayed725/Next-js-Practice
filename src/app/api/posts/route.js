@@ -15,3 +15,12 @@ export async function GET() {
    return NextResponse.json(posts);
 
 }
+
+
+export async function POST(request) {
+   await connectDB();
+   const body = await request.json();
+
+   const newPost = await Post.create(body)
+   return NextResponse.json( {message: "post created successfully", post: newPost }); 
+}
