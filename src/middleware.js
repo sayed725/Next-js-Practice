@@ -9,7 +9,11 @@ const isPublicRoute = createRouteMatcher([
   '/parellel-data',
   '/db-post',
   '/api/posts',
-  '/api/post'
+  '/api/post',
+  '/db-post/(.*)',
+  '/db-post/(.*)/edit',
+  '/api/posts/(.*)',
+  '/api/posts/(.*)/edit',
   
 ]);
 

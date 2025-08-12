@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { connectDB } from "@/lib/mongodb";
 import { Post } from "@/models/Post";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const PostsPage = () => {
@@ -110,7 +111,9 @@ const PostsPage = () => {
 
       {posts.map((post) => (
         <div key={post._id} className="border-2 p-5 rounded-lg shadow-md mt-5">
-          <h2 className="text-xl font-semibold">{post.title}</h2>
+          <Link href={`/db-post/${post._id}`}>
+            <h2 className="text-2xl font-bold">{post.title}</h2>
+          </Link>
           <p className="mt-2">{post.author}</p>
           <p className="mt-2">{post.description}</p>
 
@@ -121,7 +124,9 @@ const PostsPage = () => {
             >
               Delete Post
             </Button>
+           <Link href={`/db-post/${post._id}/edit`}>
             <Button className="mt-3">Edit Post</Button>
+           </Link>
             </div>
 
 
