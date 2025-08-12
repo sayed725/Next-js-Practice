@@ -113,9 +113,18 @@ const PostsPage = () => {
           <h2 className="text-xl font-semibold">{post.title}</h2>
           <p className="mt-2">{post.author}</p>
           <p className="mt-2">{post.description}</p>
-          <Button onClick={() => deletePost(post._id)} className="mt-5">
-            Delete
-          </Button>
+
+          <div className="flex justify-center gap-5">
+            <Button
+              className="mt-3 mr-2"
+              onClick={() => deletePost(post._id)}
+            >
+              Delete Post
+            </Button>
+            <Button className="mt-3">Edit Post</Button>
+            </div>
+
+
         </div>
       ))}
     </div>
