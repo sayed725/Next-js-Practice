@@ -1,5 +1,6 @@
 
 "use client"
+import SubmitButton from '@/components/SubmitButton';
 import { Button } from '@/components/ui/button'
 import { createMember } from '@/lib/actions';
 import React, { useRef } from 'react'
@@ -54,8 +55,10 @@ const CreateMemberPage = () => {
             placeholder="Email"
             className="border border-gray-200 p-2 mt-5 rounded w-full mb-3"
           />
-         
-          <Button type="submit" className='rounded-md mt-5'>Create Member</Button>
+{/*          
+          <Button type="submit" className='rounded-md mt-5'>Create Member</Button> */}
+
+          <SubmitButton/>
         </div>
        </form>
        

@@ -8,6 +8,9 @@ import { connectDB } from "./mongodb";
 
     await connectDB();
 
+
+    await new Promise((resolve)=> setTimeout(resolve,1000))
+
      const name = formData.get('name');
         const email = formData.get('email');
 
