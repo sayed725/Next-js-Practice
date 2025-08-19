@@ -2,6 +2,7 @@
 import { model, models, Schema } from "mongoose";
 
 
+
 const MemberSchema = new Schema({
     name: {
         type: String,
@@ -10,6 +11,7 @@ const MemberSchema = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },  
 },{
     timestamps: true,

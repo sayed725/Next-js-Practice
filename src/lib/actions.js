@@ -3,6 +3,7 @@
 
 import { Member } from "@/models/Member";
 import { connectDB } from "./mongodb";
+import { revalidatePath } from "next/cache";
 
  export const createMember = async (formData) => {
 
@@ -40,3 +41,54 @@ import { connectDB } from "./mongodb";
         };
      }
  }
+
+
+export const updateMember = async (id, prevState, formData) => {
+  await connectDB();
+
+  const name = formData.get("name")?.trim();
+  const email = formData.get("email")?.trim();
+
+  if (!name || !email) {
+    return {
+      success: false,
+      message: "Name and email are required",
+    };
+  }
+
+ 
+
+  try {
+    const updatedMember = await Member.findByIdAndUpdate(
+      id,
+      { name, email },
+      { new: true, runValidators: true }
+    ).select("name email");
+
+    if (!updatedMember) {
+      return {
+        success: false,
+        message: "Member not found",
+      };
+    }
+
+    revalidatePath(`/member/${id}`);
+    revalidatePath(`/member`);
+
+    return {
+      success: true,
+      message: "Member updated successfully",
+      member: {
+        ...updatedMember.toObject(),
+        _id: updatedMember._id.toString(), // Ensure _id is a string
+      },
+    };
+  } catch (error) {
+    console.error("Error updating member:", error);
+    return {
+      success: false,
+      message: error.name === "ValidationError" ? "Invalid data provided" : "Error updating member",
+      error: error.message,
+    };
+  }
+};
