@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import { ThemeProvider } from "@/context/ThemeContext";
+import NewNavbar from "@/components/shared/newNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +27,8 @@ export default function RootLayout({ children }) {
     <ThemeProvider>
         <html lang="en">
         <body className="bg-gray-100">
-          <Navbar />
+          {/* <Navbar /> */}
+          <NewNavbar/>
           <main className="max-w-7xl mx-auto">
            {children}
           </main>
