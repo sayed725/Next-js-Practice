@@ -2,11 +2,21 @@
 "use client";
 
 import UserProfilePage from "@/app/user-profile/[[...user-profile]]/page";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
 export default function Navbar() {
+
+    const { user, isLoaded , isSignedIn } = useUser();
+
+    const role = user?.publicMetadata?.role;
+
+    console.log("User Role:", role);
+
+
+
+
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -35,6 +45,48 @@ export default function Navbar() {
           </Link>
         </div>
 
+
+        {/* <div className="text-black">
+            {
+                isSignedIn ? ( isSignedIn?
+                 ( <>
+                 {
+                    role === "user" && (
+                        <Link href="/user-dashboard">
+                            <Button className="">
+                                User Dashboard
+                            </Button>
+                        </Link>
+                    )
+                 }
+
+                 {
+                    role === "admin" && (
+                        <Link href="/admin-dashboard">
+                            <Button className="">
+                                Admin Dashboard
+                            </Button>
+                        </Link>
+                    )
+                 }
+
+                 {
+                    role === "member" && (
+                        <Link href="/super-admin-dashboard">
+                            <Button className="">
+                                Member Dashboard
+                            </Button>
+                        </Link>
+                    )
+                 }
+                </>) : <p>Hello</p>): <p>Register</p>
+            }
+        </div> */}
+
+
+
+
+
         {/* Auth Buttons */}
         <div className="flex space-x-4">
           <SignedOut>
@@ -48,6 +100,7 @@ export default function Navbar() {
                 Profile
               </Button>
             </Link>
+            <SignOutButton/>
           </SignedIn>
         </div>
       </div>
