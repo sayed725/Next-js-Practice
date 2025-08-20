@@ -12,7 +12,7 @@ export default function Navbar() {
 
     const role = user?.publicMetadata?.role;
 
-    console.log("User Role:", role);
+    // console.log("User Role:", role);
 
 
 
