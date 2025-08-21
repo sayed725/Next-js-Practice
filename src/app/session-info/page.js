@@ -23,7 +23,7 @@ const SessionInfoPage = () => {
 
   return (
     <div className='min-h-screen py-16 text-center'>
-        <h1 className='text-3xl font-bold py-10'>Session Information</h1>
+        <h1 className='text-3xl font-bold py-10'>Session Information will preset here</h1>
 
         <p className='text-lg'></p>
         
