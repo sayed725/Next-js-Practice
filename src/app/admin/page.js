@@ -13,8 +13,6 @@ const AdminDashboard = async () => {
         ADMIN DASHBOARD PAGE ({users.length})
       </h1>
 
-      <h2>Admin dashboard contents will preset here</h2>
-
       <div className="overflow-x-auto">
         <table className="min-w-full border mx-auto  rounded-lg shadow-md">
           <thead className="">
